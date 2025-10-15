@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For JANA 🖤</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at bottom, #1a001f, #000000 80%);
+    color: #e0b3ff;
+    font-family: 'Cinzel Decorative', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* النجوم */
+  .stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #d9b3ff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 4s infinite ease-in-out;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 1; }
+  }
+
+  /* الضباب */
+  .fog {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(120,80,160,0.1) 0%, rgba(0,0,0,0.7) 70%);
+    animation: fogmove 60s linear infinite;
+    z-index: 1;
+  }
+
+  @keyframes fogmove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(50%); }
+  }
+
+  /* الاسم */
+  h1 {
+    font-size: 5rem;
+    letter-spacing: 6px;
+    color: #c68cff;
+    text-shadow: 0 0 25px #8000ff, 0 0 60px #4b0082;
+    margin: 0;
+    z-index: 2;
+    animation: fadeIn 3s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* الجملة */
+  p {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.6rem;
+    text-align: center;
+    color: #e6ccff;
+    margin-top: 10px;
+    text-shadow: 0 0 20px #8000ff;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeInText 4s ease-in 2s forwards;
+  }
+
+  @keyframes fadeInText {
+    to { opacity: 1; }
+  }
+
+  /* القلوب */
+  .heart {
+    position: fixed;
+    top: -10px;
+    color: #b366ff;
+    font-size: 20px;
+    animation: fall 7s linear infinite;
+    opacity: 0.8;
+    z-index: 1;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* الخفاش */
+  .bat {
+    position: fixed;
+    top: 15%;
+    width: 60px;
+    height: 30px;
+    background: transparent;
+    z-index: 3;
+    animation: fly 20s ease-in-out infinite alternate;
+  }
+
+  .bat::before,
+  .bat::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 15px;
+    background: #330066;
+    border-radius: 30px 30px 0 0;
+  }
+
+  .bat::before {
+    left: 0;
+    transform-origin: right bottom;
+    animation: flap 0.6s ease-in-out infinite;
+  }
+
+  .bat::after {
+    right: 0;
+    transform-origin: left bottom;
+    animation: flap 0.6s ease-in-out infinite reverse;
+  }
+
+  @keyframes flap {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(25deg); }
+  }
+
+  @keyframes fly {
+    0% { left: -80px; transform: scaleX(1); }
+    100% { left: calc(100% + 80px); transform: scaleX(-1); }
+  }
+</style>
+</head>
+<body>
+
+  <div class="stars" id="stars"></div>
+  <div class="fog"></div>
+  <div class="bat"></div>
+
+  <h1>JANA</h1>
+  <p>We will remain friends until the end of time,<br>
+     whether you are here or not,<br>
+     you will always be in my heart.</p>
+
+  <script>
+    // إنشاء نجوم عشوائية
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 5 + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // إنشاء قلوب تتساقط
+    const hearts = ["💜","🖤"];
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 10 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 5 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
